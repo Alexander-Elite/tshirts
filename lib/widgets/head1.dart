@@ -97,44 +97,6 @@ class _Head1State extends State<Head1> {
                 ),
               ],
             ),
-            // MyProduct(),
-            /*
-            BlocBuilder<ProductsBloc, ProductsState>(builder: (context, state) {
-              // final products = ProductsState.of(context).products;
-              // final products = Provider.of<ProductsNotifier>(context).products;
-              // final products = context.read<ProductsNotifier>().products;
-              // final products = context.watch<ProductsNotifier>().products;
-
-              if (state is ProductsLoading)
-              {
-                return Center( child: CircularProgressIndicator() );
-              }
-
-              if (state is ProductsFailed )
-              {
-                return Text(
-                  state.errorText,
-                  style: TextStyle(color: Colors.red),
-                );
-              }
-
-              if (state is ProductsLoaded)
-              {
-                return ListView.separated(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: state.products.length,
-                  itemBuilder: (context, index) => MyProduct(
-                    product: state.products[index],
-                    onAdd: () => _addToCart(context, state.products[index]),
-                  ),
-                  separatorBuilder: (context, index) => const SizedBox(height: 16),
-                );
-              }
-
-              return SizedBox();
-
-
-            }), */
           ],
         ),
       ],
@@ -142,4 +104,3 @@ class _Head1State extends State<Head1> {
   }
 }
 
-// Note: Same code is applied for the TextFormField as well
