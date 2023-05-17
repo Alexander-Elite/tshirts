@@ -15,8 +15,7 @@ class _Head1State extends State<Head1> {
   final _titleController = TextEditingController();
 
   @override
-  void initState()
-  {
+  void initState() {
     // _titleController.text = widget.toString() ?? '';
     super.initState();
   }
@@ -24,8 +23,7 @@ class _Head1State extends State<Head1> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,19 +32,21 @@ class _Head1State extends State<Head1> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Authentic World Cup Kits",
+              const Text(
+                "Authentic World Cup Kits",
                 style: ThemeFonts.r22,
                 textAlign: TextAlign.left,
               ),
-              const SizedBox(height: 30,),
-
+              const SizedBox(
+                height: 30,
+              ),
               Form(
                 key: _formKey,
                 child: TextFormField(
                   controller: _titleController,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.zero,
-                    prefixIcon: Icon(Icons.search, color:  ThemeColors.title2 ),
+                    prefixIcon: Icon(Icons.search, color: ThemeColors.title2),
                     hintText: 'Search Kits',
                     hintStyle: TextStyle(color: ThemeColors.srchint),
                     enabledBorder: OutlineInputBorder(
@@ -63,33 +63,38 @@ class _Head1State extends State<Head1> {
             ],
           ),
         ),
-
-       Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 IconButton(
-                  icon: SvgPicture.asset('images/sort1a.svg', /*width: 20, height: 20,*/),
+                  icon: SvgPicture.asset(
+                    'images/sort1a.svg', /*width: 20, height: 20,*/
+                  ),
                   padding: EdgeInsets.zero,
-                  onPressed: (){},
+                  onPressed: () {},
                   // iconSize: 8,
                   // visualDensity: VisualDensity.compact,
                 ),
-
                 IconButton(
-                  icon: SvgPicture.asset('images/sort2i.svg', /*width: 20, height: 20,*/),
-                  onPressed: (){},
+                  icon: SvgPicture.asset(
+                    'images/sort2i.svg', /*width: 20, height: 20,*/
+                  ),
+                  onPressed: () {},
                   padding: EdgeInsets.zero,
                   // iconSize: 8,
                   // visualDensity: VisualDensity.compact,
                 ),
-
                 Expanded(child: Container()),
-                const Text('FILTER', style: ThemeFonts.sorts ),
-                const SizedBox(width: 27,),
-                const Text('SORT', style: ThemeFonts.sorts ),
-                const SizedBox(width: 16,),
+                const Text('FILTER', style: ThemeFonts.sorts),
+                const SizedBox(
+                  width: 27,
+                ),
+                const Text('SORT', style: ThemeFonts.sorts),
+                const SizedBox(
+                  width: 16,
+                ),
               ],
             ),
             // MyProduct(),
@@ -133,12 +138,8 @@ class _Head1State extends State<Head1> {
           ],
         ),
       ],
-
-
     );
   }
 }
-
-
 
 // Note: Same code is applied for the TextFormField as well
