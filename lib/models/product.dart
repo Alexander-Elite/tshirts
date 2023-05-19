@@ -1,3 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'product.g.dart';
+
+// для запуска генерации пишем: flutter packages pub run build_runner watch
+
+@JsonSerializable()
 class Product {
   final int id;
   final String title;
@@ -29,7 +35,8 @@ class Product {
       title: 'test Заголовок Заголовок Привет',
       description: 'Adidas',
       price: (245).toDouble(),
-      thumbnail: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
+      thumbnail:
+          'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
     );
   }
 }

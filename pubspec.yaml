@@ -90,6 +90,7 @@ flutter:
         - asset: assets/font/Roboto-Bold.ttf
           weight: 700
         - asset: assets/font/Roboto-Medium.ttf
+          weight: 600
 
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic

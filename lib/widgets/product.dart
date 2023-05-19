@@ -15,10 +15,7 @@ class MyProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      // clipBehavior: Clip.hardEdge,
-
-      // elevation: 1,
+      elevation: 0,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,24 +31,39 @@ class MyProduct extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                product.title.toUpperCase(),
-                style: ThemeFonts.product_title,
-                // overflow: TextOverflow.visible,
-                softWrap: true,
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              Text(product.description.toUpperCase(),
-                  style: ThemeFonts.product_descr),
-              SizedBox(
-                height: 12,
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.title.toUpperCase(),
+                  style: ThemeFonts.product_title,
+                  // overflow: TextOverflow.visible,
+                  softWrap: true,
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                Text(product.description.toUpperCase(),
+                    style: ThemeFonts.product_descr),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text("\$" + product.price.toString(),
+                        style: ThemeFonts.r16),
+                    Expanded(
+                      child: Container(),
+                    ),
+                    const Text(
+                      "ADD TO CART",
+                      style: ThemeFonts.productAddToCart,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final Product prod = new Product.test();
+    final Product prod = Product.test();
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
       body: Column(
@@ -24,17 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: ListView.separated(
                 padding: const EdgeInsets.all(16),
-                itemBuilder: (BuildContext context, int index) =>
-                    MyProduct(product: prod, onAdd: () {}),
-/*                     Column(children: [
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Text("asd"),
-                      SizedBox(
-                        height: 18,
-                      )
-                    ]), */
+                itemBuilder: (BuildContext context, int index) => MyProduct(
+                      product: prod,
+                      onAdd: () {},
+                    ),
                 separatorBuilder: (BuildContext context, int index) =>
                     const Divider(color: Colors.transparent),
                 itemCount: 15),

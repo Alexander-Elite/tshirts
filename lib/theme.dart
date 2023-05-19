@@ -36,4 +36,10 @@ class ThemeFonts {
     color: ThemeColors.title2,
     fontWeight: FontWeight.w400,
   );
+
+  static const productAddToCart = TextStyle(
+    fontSize: 12,
+    color: Color(0xFF2196F3),
+    fontWeight: FontWeight.w700,
+  );
 }
