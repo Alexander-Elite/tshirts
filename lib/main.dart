@@ -6,78 +6,76 @@ import 'package:tshirts/theme.dart';
 // import 'package:flutter/widgets.dart';
 
 void main() {
-  runApp(
-      MaterialApp(
-        home: MyApp(),
-        debugShowCheckedModeBanner: false,
-      )
+  MaterialApp(
+    theme: ThemeData(fontFamily: 'Roboto'),
   );
+
+  runApp(MaterialApp(
+    home: MyApp(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
 
-
-class MyApp extends StatelessWidget
-{
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
-       backgroundColor: ThemeColors.scaffold,
-       elevation: 0,
-       title: const Text('FIFA World Cup Kits',
-         style: ThemeFonts.r16,
-       ),
-       centerTitle: true,
-       leading: const Icon(
-         Icons.menu,
-         color: ThemeColors.title2,
-       ),
-       actions: [
-         Stack(
-           alignment: Alignment.center,
-           children: [
-             IconButton(
-               onPressed: () {},
-               icon: SvgPicture.asset(
-                 'images/shape.svg',
-                 width: 20,
-                 height: 20,
-               ),
-             ),
-             Positioned(
-               right: 8,
-               top: 12,
-               child: Container(
-                 width: 16,
-                 height: 16,
-                 decoration: const BoxDecoration(
-                   color: Colors.red,
-                   shape: BoxShape.circle,
-                 ),
-                 alignment: Alignment.center,
-                 child: const Text(
-                   '2',
-                   style: TextStyle(fontSize: 10),
-                 ),
-               ),
-             ),
-             const SizedBox(width: 20),
-           ],
-         ),
-
-       ],
-     ),
-     body: const HomeScreen(),
-     // bottomSheet: const BottomLine(),
-     bottomNavigationBar: const BottomLine(),
-     );
+      appBar: AppBar(
+        backgroundColor: ThemeColors.scaffold,
+        elevation: 0,
+        title: const Text(
+          'FIFA World Cup Kits',
+          style: ThemeFonts.r16,
+        ),
+        centerTitle: true,
+        leading: const Icon(
+          Icons.menu,
+          color: ThemeColors.title2,
+        ),
+        actions: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: SvgPicture.asset(
+                  'images/shape.svg',
+                  width: 20,
+                  height: 20,
+                ),
+              ),
+              Positioned(
+                right: 8,
+                top: 12,
+                child: Container(
+                  width: 16,
+                  height: 16,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    '2',
+                    style: TextStyle(fontSize: 10),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 20),
+            ],
+          ),
+        ],
+      ),
+      body: const HomeScreen(),
+      // bottomSheet: const BottomLine(),
+      bottomNavigationBar: const BottomLine(),
+    );
   }
 }
 
-class BottomLine extends StatelessWidget
-{
+class BottomLine extends StatelessWidget {
   const BottomLine({Key? key}) : super(key: key);
 
   @override
@@ -88,7 +86,10 @@ class BottomLine extends StatelessWidget
       width: MediaQuery.of(context).size.width,
       color: const Color(0xFF263238),
       padding: const EdgeInsets.all(20),
-      child: const Text("© FIFA World Cup Kits 2018", style: TextStyle( color: Color(0xFFECEFF1), fontSize: 16 ),),
+      child: const Text(
+        "© FIFA World Cup Kits 2018",
+        style: TextStyle(color: Color(0xFFECEFF1), fontSize: 16),
+      ),
     );
   }
 }

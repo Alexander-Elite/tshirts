@@ -22,4 +22,14 @@ class Product {
       thumbnail: json['thumbnail'],
     );
   }
+
+  factory Product.test() {
+    return Product(
+      id: 1,
+      title: 'test Заголовок Заголовок Привет',
+      description: 'Adidas',
+      price: (245).toDouble(),
+      thumbnail: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
+    );
+  }
 }

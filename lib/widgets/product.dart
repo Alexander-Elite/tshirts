@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tshirts/models/product.dart';
+import 'package:tshirts/theme.dart';
 
 class MyProduct extends StatelessWidget {
   final Product product;
@@ -14,62 +15,44 @@ class MyProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      clipBehavior: Clip.hardEdge,
-      elevation: 4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      // clipBehavior: Clip.hardEdge,
+
+      // elevation: 1,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 200,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Image.network(
-                    product.thumbnail,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(8),
-                    child: Text('\$${product.price.toStringAsFixed(2)}'),
-                  ),
-                ),
-              ],
+            height: 112,
+            child: Positioned.fill(
+              child: Image.network(
+                product.thumbnail,
+                height: 112,
+                width: 112,
+                alignment: Alignment.centerLeft,
+                // fit: BoxFit.cover,
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.title,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        product.description,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.add_shopping_cart_rounded),
-                  onPressed: onAdd,
-                )
-              ],
-            ),
-          )
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                product.title.toUpperCase(),
+                style: ThemeFonts.product_title,
+                // overflow: TextOverflow.visible,
+                softWrap: true,
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Text(product.description.toUpperCase(),
+                  style: ThemeFonts.product_descr),
+              SizedBox(
+                height: 12,
+              ),
+            ],
+          ),
         ],
       ),
     );
