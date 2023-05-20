@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tshirts/screens/home_screen.dart';
+import 'package:tshirts/screens/product_detail.dart';
 import 'package:tshirts/theme.dart';
 // import 'package:flutter/widgets.dart';
 
@@ -10,7 +11,7 @@ void main() {
     theme: ThemeData(fontFamily: 'Roboto'),
   );
 
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: MyApp(),
     debugShowCheckedModeBanner: false,
   ));
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
       ),
-      body: const HomeScreen(),
+      body: ProductDetail(),// const HomeScreen(),
       // bottomSheet: const BottomLine(),
       bottomNavigationBar: const BottomLine(),
     );

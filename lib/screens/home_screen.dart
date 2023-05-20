@@ -24,13 +24,17 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: ListView.separated(
                 padding: const EdgeInsets.all(16),
-                itemBuilder: (BuildContext context, int index) => MyProduct(
+                itemCount: 15,
+                itemBuilder: (BuildContext context, int index) => (
+                     MyProduct(
+                      cols: true,
                       product: prod,
                       onAdd: () {},
-                    ),
+                    )
+                ),
                 separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(color: Colors.transparent),
-                itemCount: 15),
+                    const Divider(color: Colors.transparent, height: 25,),
+            ),
           ),
         ],
       ),

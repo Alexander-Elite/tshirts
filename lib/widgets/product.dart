@@ -5,12 +5,34 @@ import 'package:tshirts/theme.dart';
 class MyProduct extends StatelessWidget {
   final Product product;
   final VoidCallback onAdd;
+  final bool cols;
 
   const MyProduct({
     Key? key,
     required this.product,
     required this.onAdd,
+    required this.cols,
   }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      (cols) ?
+      Product1Widget(product: product,)
+      : Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Product2Widget(product: product,),
+          Product2Widget(product: product,),
+          const SizedBox(height: 35,),
+        ],
+      );
+  }
+}
+
+class Product1Widget extends StatelessWidget {
+  const Product1Widget({Key? key, required this.product,}) : super(key: key);
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -37,21 +59,22 @@ class MyProduct extends StatelessWidget {
               children: [
                 Text(
                   product.title.toUpperCase(),
-                  style: ThemeFonts.product_title,
-                  // overflow: TextOverflow.visible,
+                  style: ThemeFonts.productTitle,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   softWrap: true,
                 ),
                 const SizedBox(
                   height: 6,
                 ),
                 Text(product.description.toUpperCase(),
-                    style: ThemeFonts.product_descr),
+                    style: ThemeFonts.productDescr),
                 const SizedBox(
                   height: 12,
                 ),
                 Row(
                   children: [
-                    Text("\$" + product.price.toString(),
+                    Text("\$${product.price}",
                         style: ThemeFonts.r16),
                     Expanded(
                       child: Container(),
@@ -64,6 +87,63 @@ class MyProduct extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class Product2Widget extends StatelessWidget {
+  const Product2Widget({Key? key, required this.product,}) : super(key: key);
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      // width: width2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 162,
+            child: Positioned.fill(
+              child: Image.network(
+                product.thumbnail,
+                alignment: Alignment.center,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          Text(
+            product.title.toUpperCase(),
+            style: ThemeFonts.productTitle,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+          ),
+          const SizedBox(
+            height: 6,
+          ),
+          Text(product.description.toUpperCase(),
+              style: ThemeFonts.productDescr),
+          const SizedBox(
+            height: 12,
+          ),
+          Row(
+              children: [
+                Text("\$" + product.price.toString(),
+                    style: ThemeFonts.r16),
+                const SizedBox(width: 30,),
+                const Text(
+                  "ADD TO CART",
+                  style: ThemeFonts.productAddToCart,
+                ),
+              ]
           ),
         ],
       ),

@@ -16,7 +16,6 @@ class _Head1State extends State<Head1> {
 
   @override
   void initState() {
-    // _titleController.text = widget.toString() ?? '';
     super.initState();
   }
 
@@ -74,8 +73,6 @@ class _Head1State extends State<Head1> {
                   ),
                   padding: EdgeInsets.zero,
                   onPressed: () {},
-                  // iconSize: 8,
-                  // visualDensity: VisualDensity.compact,
                 ),
                 IconButton(
                   icon: SvgPicture.asset(
@@ -83,8 +80,6 @@ class _Head1State extends State<Head1> {
                   ),
                   onPressed: () {},
                   padding: EdgeInsets.zero,
-                  // iconSize: 8,
-                  // visualDensity: VisualDensity.compact,
                 ),
                 Expanded(child: Container()),
                 const Text('FILTER', style: ThemeFonts.sorts),

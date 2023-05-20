@@ -25,13 +25,13 @@ class ThemeFonts {
     fontWeight: FontWeight.w700,
   );
 
-  static const product_title = TextStyle(
+  static const productTitle = TextStyle(
     fontSize: 14,
     color: ThemeColors.title,
     fontWeight: FontWeight.w600,
   );
 
-  static const product_descr = TextStyle(
+  static const productDescr = TextStyle(
     fontSize: 14,
     color: ThemeColors.title2,
     fontWeight: FontWeight.w400,
@@ -42,4 +42,12 @@ class ThemeFonts {
     color: Color(0xFF2196F3),
     fontWeight: FontWeight.w700,
   );
+
+  static const productDetailTitle = TextStyle(
+    fontSize: 24,
+    color: ThemeColors.title,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'Montserrat',
+  );
+
 }
