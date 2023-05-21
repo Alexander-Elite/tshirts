@@ -50,4 +50,11 @@ class ThemeFonts {
     fontFamily: 'Montserrat',
   );
 
+  static const productDetailPrice = TextStyle(
+    fontSize: 20,
+    color: ThemeColors.title,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'Montserrat',
+  );
+
 }

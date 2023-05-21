@@ -92,6 +92,12 @@ flutter:
         - asset: assets/font/Roboto-Medium.ttf
           weight: 600
 
+    - family: Montserrat
+      fonts:
+        - asset: assets/font/Montserrat-VariableFont_wght.ttf
+        - asset: assets/font/Montserrat-Bold.ttf
+          weight: 700
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

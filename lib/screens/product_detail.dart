@@ -46,13 +46,145 @@ class _ProductDetailState extends State<ProductDetail> {
               const SizedBox(height: 6,),
               Text(prod.description.toUpperCase(), style: ThemeFonts.productDescr,),
               const SizedBox(height: 17,),
-              Text("\$" + prod.price.toInt().toString(), style: ThemeFonts.productDetailTitle,),
+              Text("\$" + prod.price.toInt().toString(), style: ThemeFonts.productDetailPrice,),
               const SizedBox(height: 18,),
               const Divider(height: 1, color: Color.fromRGBO(127, 151, 163, 32), indent: 16, endIndent: 16, ),
-            ],
-          )
-        ],
+              const SizedBox(height: 24,),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Size", style: ThemeFonts.r16,),
+                  SizedBox(width: 25,),
+                  SizeBoxWidget(sizeIndex: "S", active: false,),
+                  SizedBox(width: 16,),
+                  SizeBoxWidget(sizeIndex: "M",),
+                  SizedBox(width: 16,),
+                  SizeBoxWidget(sizeIndex: "L", selected: true,),
+                  SizedBox(width: 16,),
+                  SizeBoxWidget(sizeIndex: "XL", active: false,),
+                  SizedBox(width: 16,),
+                  SizeBoxWidget(sizeIndex: "XXL", active: false,),
+                ],
+              ),
+              const SizedBox(height: 24,),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Kit", style: ThemeFonts.r16,),
+                  SizedBox(width: 19,),
+                  SizeBoxWidget(sizeIndex: "HOME", selected: true, wWidth: 72,),
+                  SizedBox(width: 16,),
+                  SizeBoxWidget(sizeIndex: "AWAY", wWidth: 80,),
+                  SizedBox(width: 16,),
+                  SizeBoxWidget(sizeIndex: "THIRD", wWidth: 80,),
+                ],
+              ),
+              const SizedBox(height: 32,),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 16,),
+                  Text("Qty", style: ThemeFonts.r16,),
+                  SizedBox(width: 19,),
+                  SizeBoxWidget(sizeIndex: "-", ),
+                  SizedBox(width: 16,),
+                  Text("1", style: TextStyle(
+                    fontSize: 22,
+                    color: ThemeColors.title,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "Roboto",
+                  )),
+                  SizedBox(width: 16,),
+                  SizeBoxWidget(sizeIndex: "+",),
+                ],
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(width: 16, height: 33,),
+                    const Text("Customize Your Jersey", style: ThemeFonts.r16,),
+                    const Expanded(child: Text("")),
+                    SvgPicture.asset('images/v.svg'),
+                    const SizedBox(width: 16,),
+                    ],
+              )
+          ],
+         ),
+        ]
       ),
+    );
+  }
+}
+
+class SizeBoxWidget extends StatelessWidget {
+  final bool active;
+  final String sizeIndex;
+  final bool selected;
+  final double wWidth;
+
+  const SizeBoxWidget({
+    Key? key,
+    this.active = true,
+    required this.sizeIndex,
+    this.wWidth = 44,
+    this.selected = false  }) : super(key: key);
+
+  get _color {
+    var r = 0xFF455A64;
+    if ( !active ) {
+      r = 0x55455A64;
+    }
+    if ( selected )
+    {
+      r = 0xFFFFFFFF;
+    }
+    return r;
+  }
+  get _bgcolor {
+    var r = Colors.white;
+    if (!active) {
+      r = const Color.fromARGB(60, 236, 239, 241);
+    }
+    if ( selected )
+    {
+      r = const Color(0xFF263238);
+    }
+    if (sizeIndex == '+' || sizeIndex == '-')
+    {
+      r = const Color(0xFFECEFF1);
+    }
+
+    return r;
+  }
+
+  get _borders
+  {
+    var w = 1.0;
+    var c = const Color(0xFF90A4AE);
+
+    if ( !active || selected || sizeIndex == '-' || sizeIndex == '+' )
+    {
+      w = 0;
+      c = Colors.transparent;
+    }
+    return Border.all( width: w, color: c, );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return  Container(
+      height: 40,
+      width: wWidth,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: _bgcolor,
+        border: _borders,
+        borderRadius: BorderRadius.circular(2),
+      ),
+      child: Text( sizeIndex, style: TextStyle(
+        color: Color(_color),
+      ) ),
     );
   }
 }
