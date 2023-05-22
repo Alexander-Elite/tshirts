@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:tshirts/models/product.dart';
 import 'package:tshirts/theme.dart';
@@ -16,22 +17,30 @@ class MyProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      (cols) ?
-      Product1Widget(product: product,)
-      : Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Product2Widget(product: product,),
-          Product2Widget(product: product,),
-          const SizedBox(height: 35,),
-        ],
-      );
+    return (cols)
+        ? Product1Widget(
+            product: product,
+          )
+        : Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Product2Widget(
+                product: product,
+              ),
+              // Product2Widget(product: product,),
+              const SizedBox(
+                height: 35,
+              ),
+            ],
+          );
   }
 }
 
 class Product1Widget extends StatelessWidget {
-  const Product1Widget({Key? key, required this.product,}) : super(key: key);
+  const Product1Widget({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
   final Product product;
 
   @override
@@ -74,8 +83,7 @@ class Product1Widget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text("\$${product.price}",
-                        style: ThemeFonts.r16),
+                    Text("\$${product.price}", style: ThemeFonts.r16),
                     Expanded(
                       child: Container(),
                     ),
@@ -94,9 +102,11 @@ class Product1Widget extends StatelessWidget {
   }
 }
 
-
 class Product2Widget extends StatelessWidget {
-  const Product2Widget({Key? key, required this.product,}) : super(key: key);
+  const Product2Widget({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
   final Product product;
 
   @override
@@ -106,13 +116,18 @@ class Product2Widget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 162,
-            child: Positioned.fill(
-              child: Image.network(
-                product.thumbnail,
-                alignment: Alignment.center,
-                fit: BoxFit.cover,
+          InkWell(
+            onTap: () {
+              AutoRouter.of(context).pushNamed('/product');
+            },
+            child: SizedBox(
+              height: 162,
+              child: Positioned.fill(
+                child: Image.network(
+                  product.thumbnail,
+                  alignment: Alignment.center,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -134,17 +149,16 @@ class Product2Widget extends StatelessWidget {
           const SizedBox(
             height: 12,
           ),
-          Row(
-              children: [
-                Text("\$" + product.price.toString(),
-                    style: ThemeFonts.r16),
-                const SizedBox(width: 30,),
-                const Text(
-                  "ADD TO CART",
-                  style: ThemeFonts.productAddToCart,
-                ),
-              ]
-          ),
+          Row(children: [
+            Text("\$" + product.price.toString(), style: ThemeFonts.r16),
+            const SizedBox(
+              width: 30,
+            ),
+            const Text(
+              "ADD TO CART",
+              style: ThemeFonts.productAddToCart,
+            ),
+          ]),
         ],
       ),
     );

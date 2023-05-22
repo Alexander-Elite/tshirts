@@ -57,4 +57,31 @@ class ThemeFonts {
     fontFamily: 'Montserrat',
   );
 
+  static const cyanButton = BoxDecoration(
+    borderRadius: BorderRadius.all(Radius.circular(20)),
+    gradient: LinearGradient(
+      colors: [Color(0xFF00BCD4), Color(0xFF00ACC1)],
+      end: FractionalOffset(1, 0),
+      begin: FractionalOffset(1, 1),
+    ),
+  );
+
+  static const cyanButtonText = TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const productDetailGray = TextStyle(
+    fontSize: 18,
+    color: ThemeColors.title2,
+    fontWeight: FontWeight.w700,
+  );
+
+  static const AlsoLikePrice = TextStyle(
+    fontSize: 16,
+    color: ThemeColors.title2,
+    fontWeight: FontWeight.w400,
+    // fontFamily: "Roboto",
+  );
 }

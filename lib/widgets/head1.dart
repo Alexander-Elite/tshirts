@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tshirts/theme.dart';
@@ -72,13 +73,18 @@ class _Head1State extends State<Head1> {
                     'images/sort1a.svg', /*width: 20, height: 20,*/
                   ),
                   padding: EdgeInsets.zero,
-                  onPressed: () {},
+                  onPressed: () {
+                    // AutoTabsRouter.of(context).setActiveIndex(2);
+                    AutoRouter.of(context).pushNamed('/product');
+                  },
                 ),
                 IconButton(
                   icon: SvgPicture.asset(
                     'images/sort2i.svg', /*width: 20, height: 20,*/
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    AutoRouter.of(context).pushNamed('/product');
+                  },
                   padding: EdgeInsets.zero,
                 ),
                 Expanded(child: Container()),
@@ -98,4 +104,3 @@ class _Head1State extends State<Head1> {
     );
   }
 }
-

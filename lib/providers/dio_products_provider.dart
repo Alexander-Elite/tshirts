@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+/* import 'package:dio/dio.dart';
 
 class DioProductsProvider // implements ProductsProvider
 {
@@ -27,4 +27,4 @@ class DioProductsProvider // implements ProductsProvider
     return list.map( (postJson) => ArticleData.fromJson(postJson) ).toList();
   }
 
-}
+} */

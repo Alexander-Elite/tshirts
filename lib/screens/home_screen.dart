@@ -1,20 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:tshirts/models/product.dart';
 import 'package:tshirts/theme.dart';
 import 'package:tshirts/widgets/head1.dart';
 import 'package:tshirts/widgets/product.dart';
 
-class HomeScreen extends StatefulWidget {
+@RoutePage()
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
-    final Product prod = Product.test();
+    List<Product> prods = [Product.test(), Product.test()];
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
       body: Column(
@@ -22,18 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           const Head1(),
           Expanded(
-            child: ListView.separated(
-                padding: const EdgeInsets.all(16),
-                itemCount: 15,
-                itemBuilder: (BuildContext context, int index) => (
-                     MyProduct(
-                      cols: true,
-                      product: prod,
-                      onAdd: () {},
-                    )
-                ),
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(color: Colors.transparent, height: 25,),
+            child: GridView(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1),
+              // ListView.separated(
+              padding: const EdgeInsets.all(16),
+              children: prods
+                  .map((e) => MyProduct(product: e, onAdd: () {}, cols: true))
+                  .toList(),
             ),
           ),
         ],
