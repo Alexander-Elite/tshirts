@@ -14,7 +14,7 @@ class AlsoLike extends StatelessWidget {
         height: 168,
         width: 168,
         child: Image.network(
-          prod.thumbnail,
+          prod.image,
           width: 148,
           height: 148,
         ),

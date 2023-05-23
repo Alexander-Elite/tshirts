@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tshirts/models/product.dart';
+import 'package:tshirts/states/productCubit.dart';
 import 'package:tshirts/theme.dart';
 import 'package:tshirts/widgets/head1.dart';
 import 'package:tshirts/widgets/product.dart';
@@ -11,7 +13,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Product> prods = [Product.test(), Product.test()];
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
       body: Column(
@@ -19,14 +20,19 @@ class HomeScreen extends StatelessWidget {
         children: [
           const Head1(),
           Expanded(
-            child: GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1),
-              // ListView.separated(
-              padding: const EdgeInsets.all(16),
-              children: prods
-                  .map((e) => MyProduct(product: e, onAdd: () {}, cols: true))
-                  .toList(),
+            child: BlocBuilder<ProductCubit, List<Product>>(
+              builder: (context, state) => GridView(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1),
+                // ListView.separated(
+                padding: const EdgeInsets.all(16),
+                children: (state.isNotEmpty)
+                    ? state
+                        .map((e) =>
+                            MyProduct(product: e, onAdd: () {}, cols: true))
+                        .toList()
+                    : [],
+              ),
             ),
           ),
         ],
@@ -34,3 +40,10 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+/*
+prods
+                  .map((e) => MyProduct(product: e, onAdd: () {}, cols: true))
+                  .toList()
+*/

@@ -54,7 +54,7 @@ class Product1Widget extends StatelessWidget {
             height: 112,
             child: Positioned.fill(
               child: Image.network(
-                product.thumbnail,
+                product.image,
                 height: 112,
                 width: 112,
                 alignment: Alignment.centerLeft,
@@ -124,7 +124,7 @@ class Product2Widget extends StatelessWidget {
               height: 162,
               child: Positioned.fill(
                 child: Image.network(
-                  product.thumbnail,
+                  product.image,
                   alignment: Alignment.center,
                   fit: BoxFit.cover,
                 ),

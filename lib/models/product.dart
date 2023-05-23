@@ -9,24 +9,20 @@ class Product {
   final String title;
   final String description;
   final double price;
-  final String thumbnail;
+  final String image;
+  final String category;
 
   const Product({
     required this.id,
     required this.title,
     required this.description,
     required this.price,
-    required this.thumbnail,
+    required this.image,
+    required this.category,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      price: (json['price'] as num).toDouble(),
-      thumbnail: json['thumbnail'],
-    );
+    return _$ProductFromJson(json);
   }
 
   factory Product.test() {
@@ -35,7 +31,8 @@ class Product {
       title: 'test Заголовок Заголовок Привет',
       description: 'Adidas',
       price: (245).toDouble(),
-      thumbnail:
+      category: "test",
+      image:
           'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
     );
   }

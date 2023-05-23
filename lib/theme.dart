@@ -5,9 +5,30 @@ class ThemeColors {
   static const title = Color(0xFF263238);
   static const title2 = Color(0xFF78909C);
   static const srchint = Color(0x55263238);
+  static const cart1 = Color(0xCC37474F);
 }
 
 class ThemeFonts {
+  static const cart1 = TextStyle(
+    fontSize: 12,
+    color: ThemeColors.cart1,
+    fontWeight: FontWeight.w600,
+    height: 3,
+  );
+
+  static const cart2 = TextStyle(
+    fontSize: 14,
+    color: ThemeColors.title,
+    fontWeight: FontWeight.w700,
+    height: 3,
+  );
+
+  static const cartBack = TextStyle(
+    fontSize: 14,
+    color: Color(0xFF2196F3),
+    fontWeight: FontWeight.w700,
+  );
+
   static const r16 = TextStyle(
     fontSize: 16,
     color: ThemeColors.title,

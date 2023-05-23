@@ -27,7 +27,7 @@ class ProductScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: 318,
                   child: Image.network(
-                    prod.thumbnail,
+                    prod.image,
                   ),
                 ),
                 Positioned(

@@ -1,4 +1,5 @@
-/* import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
+import 'package:tshirts/models/product.dart';
 
 class DioProductsProvider // implements ProductsProvider
 {
@@ -9,22 +10,17 @@ class DioProductsProvider // implements ProductsProvider
 
   // https://fakestoreapi.com/products
 
-  DioProductsProvider()
-  {
-    _dio = Dio(   BaseOptions( baseUrl: 'https://fakestoreapi.com' )  );
-    _dio.interceptors.add(
-        LogInterceptor(
-          responseBody: true,
+  DioProductsProvider() {
+    _dio = Dio(BaseOptions(baseUrl: 'https://fakestoreapi.com'));
+    _dio.interceptors.add(LogInterceptor(
+      responseBody: false,
     ));
   }
 
-
-  @override
-  Future<List<ProductData>> getProducts() async
-  {
-    final response = await _dio.get('/posts');
-    final list = response.data['posts'] as List;
-    return list.map( (postJson) => ArticleData.fromJson(postJson) ).toList();
+  Future<List<Product>> getProducts() async {
+    final response = await _dio.get("/products/category/men's clothing");
+    return (response.data as List)
+        .map((postJson) => Product.fromJson(postJson))
+        .toList();
   }
-
-} */
+}
