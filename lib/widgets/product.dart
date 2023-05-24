@@ -53,11 +53,12 @@ class Product1Widget extends StatelessWidget {
               product.image,
               height: 112,
               width: 112,
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.center,
               // fit: BoxFit.cover,
             ),
           ),
         ),
+        const SizedBox(width: 16,),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
