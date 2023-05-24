@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tshirts/app.dart';
-import 'package:tshirts/auto_route.dart';
-import 'package:tshirts/screens/home_screen.dart';
-import 'package:tshirts/screens/product_screen.dart';
-import 'package:tshirts/theme.dart';
+
 // import 'package:flutter/widgets.dart';
 
 void main() {

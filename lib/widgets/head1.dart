@@ -1,24 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tshirts/states/catalog_view_cubit.dart';
 import 'package:tshirts/theme.dart';
 import 'package:tshirts/widgets/custom_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tshirts/widgets/product.dart';
 
-class Head1 extends StatefulWidget {
-  const Head1({Key? key}) : super(key: key);
-  @override
-  State<Head1> createState() => _Head1State();
-}
-
-class _Head1State extends State<Head1> {
+class Head1 extends StatelessWidget {
+  Head1({Key? key}) : super(key: key);
   final _titleController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -63,42 +54,52 @@ class _Head1State extends State<Head1> {
             ],
           ),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+        BlocBuilder<CatalogViewCubit, bool>(
+          builder: (context, state) {
+            CatalogViewCubit _cvc = context.watch<CatalogViewCubit>();
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  icon: SvgPicture.asset(
-                    'images/sort1a.svg', /*width: 20, height: 20,*/
-                  ),
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    // AutoTabsRouter.of(context).setActiveIndex(2);
-                    AutoRouter.of(context).pushNamed('/product');
-                  },
-                ),
-                IconButton(
-                  icon: SvgPicture.asset(
-                    'images/sort2i.svg', /*width: 20, height: 20,*/
-                  ),
-                  onPressed: () {
-                    AutoRouter.of(context).pushNamed('/product');
-                  },
-                  padding: EdgeInsets.zero,
-                ),
-                Expanded(child: Container()),
-                const Text('FILTER', style: ThemeFonts.sorts),
-                const SizedBox(
-                  width: 27,
-                ),
-                const Text('SORT', style: ThemeFonts.sorts),
-                const SizedBox(
-                  width: 16,
+                Row(
+                  children: [
+                    IconButton(
+                      icon: SvgPicture.asset(
+                        'images/sort1a.svg',
+                        color:
+                            _cvc.state ? Color(0xFF455A64) : Color(0xFF90A4AE),
+                      ),
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        // AutoTabsRouter.of(context).setActiveIndex(2);
+                        _cvc.set(true);
+                      },
+                    ),
+                    IconButton(
+                      icon: SvgPicture.asset(
+                        'images/sort2a.svg',
+                        /*width: 20, height: 20,*/
+                        color:
+                            _cvc.state ? Color(0xFF90A4AE) : Color(0xFF455A64),
+                      ),
+                      onPressed: () {
+                        _cvc.set(false);
+                      },
+                      padding: EdgeInsets.zero,
+                    ),
+                    Expanded(child: Container()),
+                    const Text('FILTER', style: ThemeFonts.sorts),
+                    const SizedBox(
+                      width: 27,
+                    ),
+                    const Text('SORT', style: ThemeFonts.sorts),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ],
     );

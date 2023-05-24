@@ -11,7 +11,7 @@ class ProductCubit extends Cubit<List<Product>> {
 
   void loadProducts() async {
     List<Product> list = await _provider.getProducts();
-    print(list);
+    // print(list);
     emit(list);
   }
 }

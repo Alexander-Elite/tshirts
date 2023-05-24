@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tshirts/models/product.dart';
+import 'package:tshirts/states/catalog_view_cubit.dart';
 import 'package:tshirts/states/productCubit.dart';
 import 'package:tshirts/theme.dart';
 import 'package:tshirts/widgets/head1.dart';
@@ -16,23 +17,41 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Head1(),
+          Head1(),
           Expanded(
             child: BlocBuilder<ProductCubit, List<Product>>(
-              builder: (context, state) => GridView(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1),
-                // ListView.separated(
-                padding: const EdgeInsets.all(16),
-                children: (state.isNotEmpty)
-                    ? state
-                        .map((e) =>
-                            MyProduct(product: e, onAdd: () {}, cols: true))
-                        .toList()
-                    : [],
-              ),
+              builder: (context, state) {
+                return BlocBuilder<CatalogViewCubit, bool>(
+                  builder: (context, state2) {
+                    List<Widget> child = state
+                        .map(
+                          (e) => MyProduct(
+                            product: e,
+                            onAdd: () {},
+                            cols: state2,
+                          ),
+                        )
+                        .toList();
+                    return state2
+                        ? ListView(
+                            padding: const EdgeInsets.all(16),
+                            children: child,
+                          )
+                        : GridView(
+                            padding: const EdgeInsets.all(16),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              // mainAxisSpacing: 52,
+                              crossAxisSpacing: 16,
+                              childAspectRatio: 0.6,
+                            ),
+                            children: child,
+                          );
+                  },
+                );
+              },
             ),
           ),
         ],
@@ -40,10 +59,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-/*
-prods
-                  .map((e) => MyProduct(product: e, onAdd: () {}, cols: true))
-                  .toList()
-*/

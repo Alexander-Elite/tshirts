@@ -18,7 +18,7 @@ class DioProductsProvider // implements ProductsProvider
   }
 
   Future<List<Product>> getProducts() async {
-    final response = await _dio.get("/products/category/men's clothing");
+    final response = await _dio.get("/products"); // /category/men's clothing
     return (response.data as List)
         .map((postJson) => Product.fromJson(postJson))
         .toList();

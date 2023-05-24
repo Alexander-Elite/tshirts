@@ -17,22 +17,20 @@ class MyProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (cols)
-        ? Product1Widget(
-            product: product,
-          )
-        : Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Product2Widget(
+    return Column(
+      children: [
+        (cols)
+            ? Product1Widget(
+                product: product,
+              )
+            : Product2Widget(
                 product: product,
               ),
-              // Product2Widget(product: product,),
-              const SizedBox(
-                height: 35,
-              ),
-            ],
-          );
+        SizedBox(
+          height: 25,
+        ),
+      ],
+    );
   }
 }
 
@@ -45,59 +43,58 @@ class Product1Widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 112,
-            child: Positioned.fill(
-              child: Image.network(
-                product.image,
-                height: 112,
-                width: 112,
-                alignment: Alignment.centerLeft,
-                // fit: BoxFit.cover,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 112,
+          child: Positioned.fill(
+            child: Image.network(
+              product.image,
+              height: 112,
+              width: 112,
+              alignment: Alignment.centerLeft,
+              // fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                product.title.toUpperCase(),
+                style: ThemeFonts.productTitle,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
               ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  product.title.toUpperCase(),
-                  style: ThemeFonts.productTitle,
-                  maxLines: 2,
+              const SizedBox(
+                height: 6,
+              ),
+              Text(product.description,
                   overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Text(product.description.toUpperCase(),
-                    style: ThemeFonts.productDescr),
-                const SizedBox(
-                  height: 12,
-                ),
-                Row(
-                  children: [
-                    Text("\$${product.price}", style: ThemeFonts.r16),
-                    Expanded(
-                      child: Container(),
-                    ),
-                    const Text(
-                      "ADD TO CART",
-                      style: ThemeFonts.productAddToCart,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  maxLines: 2,
+                  style: ThemeFonts.productDescr),
+              const SizedBox(
+                height: 12,
+              ),
+              Row(
+                children: [
+                  Text("\$${product.price}", style: ThemeFonts.r16),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  const Text(
+                    "ADD TO CART",
+                    style: ThemeFonts.productAddToCart,
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -107,14 +104,14 @@ class Product2Widget extends StatelessWidget {
     Key? key,
     required this.product,
   }) : super(key: key);
+
   final Product product;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      // width: width2,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
             onTap: () {
@@ -122,11 +119,12 @@ class Product2Widget extends StatelessWidget {
             },
             child: SizedBox(
               height: 162,
+              width: 162,
               child: Positioned.fill(
                 child: Image.network(
                   product.image,
                   alignment: Alignment.center,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.scaleDown,
                 ),
               ),
             ),
@@ -144,19 +142,26 @@ class Product2Widget extends StatelessWidget {
           const SizedBox(
             height: 6,
           ),
-          Text(product.description.toUpperCase(),
-              style: ThemeFonts.productDescr),
+          Text(
+            product.description,
+            style: ThemeFonts.productDescr,
+            maxLines: 2,
+          ),
           const SizedBox(
             height: 12,
           ),
           Row(children: [
-            Text("\$" + product.price.toString(), style: ThemeFonts.r16),
             const SizedBox(
-              width: 30,
+              width: 12,
             ),
+            Text("\$" + product.price.toString(), style: ThemeFonts.r16),
+            const Expanded(child: Text("")),
             const Text(
               "ADD TO CART",
               style: ThemeFonts.productAddToCart,
+            ),
+            const SizedBox(
+              width: 12,
             ),
           ]),
         ],
