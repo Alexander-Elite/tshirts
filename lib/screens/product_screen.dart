@@ -171,7 +171,8 @@ class ProductScreen extends StatelessWidget {
                     const SizedBox(
                       height: 32,
                     ),
-                    ButtonLine(),
+                    const ButtonLine(
+                        zag: "Kit", btns: ['HOME', 'AWAY', 'THIRD']),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -419,26 +420,41 @@ class SizeBoxWidget extends StatelessWidget {
 }
 
 class ButtonLine extends StatefulWidget {
-  const ButtonLine({super.key});
+  final String zag;
+  final List btns;
+  const ButtonLine({required this.zag, required this.btns, super.key});
 
   @override
   State<ButtonLine> createState() => _ButtonLineState();
 }
 
 class _ButtonLineState extends State<ButtonLine> {
+  _ButtonLineState();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 40,
       width: 100,
       alignment: Alignment.center,
-      child: const Row(
+      child: Row(
         children: [
-          Text("2323232323"),
-          SizeBoxWidget(
-            sizeIndex: "THIRD",
-            wWidth: 80,
+          Text(widget.zag),
+          ListView(
+            padding: const EdgeInsets.all(10),
+            // children: widget.btns.map((e) => const Text("@@")).toList(),
+            children: widget.btns
+                .map((e) => SizeBoxWidget(
+                      sizeIndex: e,
+                    ))
+                .toList(),
           ),
+
+/*           widget.btns.map ((e) => 
+          SizeBoxWidget(
+            sizeIndex: e,
+            wWidth: 80,
+          )).toList(), */
         ],
       ),
     );
