@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tshirts/states/catalog_view_cubit.dart';
+import 'package:tshirts/states/detail_cubit.dart';
 import 'package:tshirts/states/productCubit.dart';
 
 import '../auto_route.dart';
@@ -17,10 +18,10 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
-      routes: const [
-        HomeRoute(),
-        ProductRoute(),
-        CartRoute(),
+      routes: [
+        const HomeRoute(),
+        ProductRoute(prod: BlocProvider.of<DetailCubit>(context).state),
+        const CartRoute(),
       ],
       builder: (context, child) {
         return Scaffold(
@@ -41,18 +42,23 @@ class MainScreen extends StatelessWidget {
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  IconButton(
-                    onPressed: () {
-                      AutoRouter.of(context).pushNamed('/cart');
-                    },
-                    icon: SvgPicture.asset(
-                      'images/shape.svg',
-                      width: 20,
-                      height: 20,
-                    ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          AutoRouter.of(context).pushNamed('/cart');
+                        },
+                        icon: SvgPicture.asset(
+                          'images/shape.svg',
+                          width: 20,
+                          height: 20,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
                   ),
                   Positioned(
-                    right: 8,
+                    right: 10,
                     top: 12,
                     child: Container(
                       width: 16,
@@ -68,7 +74,6 @@ class MainScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 20),
                 ],
               ),
             ],

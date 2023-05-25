@@ -99,10 +99,17 @@ class ThemeFonts {
     fontWeight: FontWeight.w700,
   );
 
+  // ignore: constant_identifier_names
   static const AlsoLikePrice = TextStyle(
     fontSize: 16,
     color: ThemeColors.title2,
     fontWeight: FontWeight.w400,
     // fontFamily: "Roboto",
+  );
+
+  static const productDetailQ = TextStyle(
+    fontSize: 22,
+    color: ThemeColors.title,
+    fontWeight: FontWeight.w700,
   );
 }

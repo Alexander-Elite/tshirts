@@ -28,9 +28,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ProductRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductRouteArgs>(
+          orElse: () => const ProductRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ProductScreen(),
+        child: ProductScreen(
+          key: args.key,
+          prod: args.prod,
+        ),
       );
     },
     MainRoute.name: (routeData) {
@@ -72,16 +77,40 @@ class HomeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ProductScreen]
-class ProductRoute extends PageRouteInfo<void> {
-  const ProductRoute({List<PageRouteInfo>? children})
-      : super(
+class ProductRoute extends PageRouteInfo<ProductRouteArgs> {
+  ProductRoute({
+    Key? key,
+    Product? prod,
+    List<PageRouteInfo>? children,
+  }) : super(
           ProductRoute.name,
+          args: ProductRouteArgs(
+            key: key,
+            prod: prod,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ProductRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ProductRouteArgs> page =
+      PageInfo<ProductRouteArgs>(name);
+}
+
+class ProductRouteArgs {
+  const ProductRouteArgs({
+    this.key,
+    this.prod,
+  });
+
+  final Key? key;
+
+  final Product? prod;
+
+  @override
+  String toString() {
+    return 'ProductRouteArgs{key: $key, prod: $prod}';
+  }
 }
 
 /// generated route for

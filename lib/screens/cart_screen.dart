@@ -99,7 +99,7 @@ class CartScreen extends StatelessWidget {
                       child: Text(""),
                     ),
                     Text(
-                      "\$" + prod.price.toString(),
+                      "\$${prod.price}",
                       style: ThemeFonts.cart2,
                     )
                   ],

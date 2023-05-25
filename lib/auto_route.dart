@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:tshirts/models/product.dart';
 import 'package:tshirts/screens/cart_screen.dart';
 import 'package:tshirts/screens/home_screen.dart';
 import 'package:tshirts/screens/product_screen.dart';

@@ -4,11 +4,11 @@ import 'package:tshirts/theme.dart';
 
 class AlsoLike extends StatelessWidget {
   final Product prod;
-  AlsoLike({super.key, required this.prod});
+  const AlsoLike({super.key, required this.prod});
 
   @override
   Widget build(BuildContext context) {
-    final Product prod = Product.test();
+    //final Product prod = Product.test();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SizedBox(
         height: 168,
@@ -23,11 +23,11 @@ class AlsoLike extends StatelessWidget {
         height: 16,
       ),
       Row(
-        children: [
-          const SizedBox(
+        children: const [
+          SizedBox(
             width: 16,
           ),
-          const Text(
+          Text(
             "Brasil Home 2018",
             style: ThemeFonts.r16,
           ),

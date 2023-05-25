@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tshirts/models/product.dart';
+import 'package:tshirts/states/detail_cubit.dart';
 import 'package:tshirts/theme.dart';
 
 class MyProduct extends StatelessWidget {
@@ -26,7 +28,7 @@ class MyProduct extends StatelessWidget {
             : Product2Widget(
                 product: product,
               ),
-        SizedBox(
+        const SizedBox(
           height: 25,
         ),
       ],
@@ -58,7 +60,9 @@ class Product1Widget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 16,),
+        const SizedBox(
+          width: 16,
+        ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,14 +115,15 @@ class Product2Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InkWell(
-            onTap: () {
-              AutoRouter.of(context).pushNamed('/product');
-            },
-            child: SizedBox(
+      child: InkWell(
+        onTap: () {
+          BlocProvider.of<DetailCubit>(context).view(product);
+          AutoTabsRouter.of(context).setActiveIndex(1);
+        },
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
               height: 162,
               width: 162,
               child: Positioned.fill(
@@ -129,43 +134,43 @@ class Product2Widget extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          Text(
-            product.title.toUpperCase(),
-            style: ThemeFonts.productTitle,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            softWrap: true,
-          ),
-          const SizedBox(
-            height: 6,
-          ),
-          Text(
-            product.description,
-            style: ThemeFonts.productDescr,
-            maxLines: 2,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          Row(children: [
             const SizedBox(
-              width: 12,
+              height: 12,
             ),
-            Text("\$" + product.price.toString(), style: ThemeFonts.r16),
-            const Expanded(child: Text("")),
-            const Text(
-              "ADD TO CART",
-              style: ThemeFonts.productAddToCart,
+            Text(
+              product.title.toUpperCase(),
+              style: ThemeFonts.productTitle,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
             ),
             const SizedBox(
-              width: 12,
+              height: 6,
             ),
-          ]),
-        ],
+            Text(
+              product.description,
+              style: ThemeFonts.productDescr,
+              maxLines: 2,
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            Row(children: [
+              const SizedBox(
+                width: 12,
+              ),
+              Text("\$${product.price}", style: ThemeFonts.r16),
+              const Expanded(child: Text("")),
+              const Text(
+                "ADD TO CART",
+                style: ThemeFonts.productAddToCart,
+              ),
+              const SizedBox(
+                width: 12,
+              ),
+            ]),
+          ],
+        ),
       ),
     );
   }

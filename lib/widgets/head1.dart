@@ -65,8 +65,9 @@ class Head1 extends StatelessWidget {
                     IconButton(
                       icon: SvgPicture.asset(
                         'images/sort1a.svg',
-                        color:
-                            _cvc.state ? Color(0xFF455A64) : Color(0xFF90A4AE),
+                        color: _cvc.state
+                            ? const Color(0xFF455A64)
+                            : const Color(0xFF90A4AE),
                       ),
                       padding: EdgeInsets.zero,
                       onPressed: () {
