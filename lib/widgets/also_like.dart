@@ -23,12 +23,12 @@ class AlsoLike extends StatelessWidget {
         height: 16,
       ),
       Row(
-        children: const [
-          SizedBox(
+        children: [
+          const SizedBox(
             width: 16,
           ),
           Text(
-            "Brasil Home 2018",
+            prod.title,
             style: ThemeFonts.r16,
           ),
         ],

@@ -95,7 +95,7 @@ class BottomLine extends StatelessWidget {
       alignment: Alignment.centerLeft,
       height: 70,
       width: MediaQuery.of(context).size.width,
-      color: const Color(0xFF263238),
+      color: ThemeColors.title,
       padding: const EdgeInsets.all(20),
       child: const Text(
         "© FIFA World Cup Kits 2018",

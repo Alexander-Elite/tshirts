@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
@@ -88,91 +89,22 @@ class ProductScreen extends StatelessWidget {
                       indent: 16,
                       endIndent: 16,
                     ),
+
                     const SizedBox(
                       height: 24,
                     ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Size",
-                          style: ThemeFonts.r16,
-                        ),
-                        SizedBox(
-                          width: 25,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "S",
-                          active: false,
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "M",
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "L",
-                          selected: true,
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "XL",
-                          active: false,
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "XXL",
-                          active: false,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Kit",
-                          style: ThemeFonts.r16,
-                        ),
-                        SizedBox(
-                          width: 19,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "HOME",
-                          selected: true,
-                          wWidth: 72,
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "AWAY",
-                          wWidth: 80,
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "THIRD",
-                          wWidth: 80,
-                        ),
-                      ],
-                    ),
+
+                    const ButtonLine(
+                        zag: "Size", btns: ['S', 'M', 'L', 'XL', "XXL"]),
+
                     const SizedBox(
                       height: 32,
                     ),
                     const ButtonLine(
-                        zag: "Kit", btns: ['HOME', 'AWAY', 'THIRD']),
+                        zag: "Kit", btns: ['HOME', 'AWAY', 'THIRD'], wWidth: 72,),
+                    const SizedBox(
+                      height: 24,
+                    ),
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -197,7 +129,6 @@ class ProductScreen extends StatelessWidget {
                               fontSize: 22,
                               color: ThemeColors.title,
                               fontWeight: FontWeight.w700,
-                              fontFamily: "Roboto",
                             )),
                         SizedBox(
                           width: 16,
@@ -328,7 +259,6 @@ class ProductScreen extends StatelessWidget {
                     SizedBox(
                       height: 240,
                       child: ListView(
-                        // clipBehavior: Clip.antiAlias,
                         scrollDirection: Axis.horizontal,
                         children: alsoo.map((e) => AlsoLike(prod: e)).toList(),
                       ),
@@ -405,6 +335,8 @@ class SizeBoxWidget extends StatelessWidget {
     return Container(
       height: 40,
       width: wWidth,
+      margin: EdgeInsetsDirectional.symmetric(horizontal: 8),
+      padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: _bgcolor,
@@ -422,7 +354,8 @@ class SizeBoxWidget extends StatelessWidget {
 class ButtonLine extends StatefulWidget {
   final String zag;
   final List btns;
-  const ButtonLine({required this.zag, required this.btns, super.key});
+  final double wWidth;
+  const ButtonLine({required this.zag, required this.btns, this.wWidth = 44, super.key});
 
   @override
   State<ButtonLine> createState() => _ButtonLineState();
@@ -433,30 +366,30 @@ class _ButtonLineState extends State<ButtonLine> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      width: 100,
-      alignment: Alignment.center,
-      child: Row(
-        children: [
-          Text(widget.zag),
-          ListView(
-            padding: const EdgeInsets.all(10),
-            // children: widget.btns.map((e) => const Text("@@")).toList(),
-            children: widget.btns
-                .map((e) => SizeBoxWidget(
-                      sizeIndex: e,
-                    ))
-                .toList(),
-          ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(widget.zag, style: ThemeFonts.r16,),
+        const SizedBox(width: 12,),
+        SizedBox(
+          height: 40,
+          width: 350,
+          child:
+            ListView(
 
-/*           widget.btns.map ((e) => 
-          SizeBoxWidget(
-            sizeIndex: e,
-            wWidth: 80,
-          )).toList(), */
-        ],
-      ),
+              scrollDirection: Axis.horizontal,
+              children: widget.btns
+                .map((e) => SizeBoxWidget(
+                    sizeIndex: e,
+                    wWidth: widget.wWidth,
+                active: Random().nextBool(),
+                selected: Random().nextBool(),
+                  ))
+              .toList(),
+        ),
+        ),
+      ],
     );
   }
 }
