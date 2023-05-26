@@ -6,14 +6,6 @@ class Qty extends StatefulWidget {
 
   Qty({required this.qt, super.key});
 
-  void incr() {
-    qt++;
-  }
-
-  void decr() {
-    qt--;
-  }
-
   @override
   State<Qty> createState() => _QtyState();
 }
@@ -38,16 +30,25 @@ class _QtyState extends State<Qty> {
           ),
           InkWell(
             onTap: () {
-              print("-");
+              if (widget.qt > 1) {
+                setState(() {
+                  widget.qt--;
+                });
+              }
             },
             child: Container(
               height: 40,
               width: 44,
               decoration: BoxDecoration(
-                color: const Color(0xFFECEFF1),
+                color: (widget.qt == 1)
+                    ? const Color(0x66ECEFF1)
+                    : const Color(0xFFECEFF1),
                 borderRadius: BorderRadius.circular(2),
               ),
-              child: Image.asset("images/-.png", alignment: Alignment.center),
+              child: Image.asset(
+                "images/-.png",
+                alignment: Alignment.center,
+              ),
             ),
           ),
           Expanded(
@@ -59,8 +60,9 @@ class _QtyState extends State<Qty> {
           ),
           InkWell(
             onTap: () {
-              widget.incr();
-              print("+");
+              setState(() {
+                widget.qt++;
+              });
             },
             child: Container(
               height: 40,
