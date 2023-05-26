@@ -1,11 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tshirts/states/catalog_view_cubit.dart';
 import 'package:tshirts/theme.dart';
-import 'package:tshirts/widgets/custom_text_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tshirts/widgets/product.dart';
 
 class Head1 extends StatelessWidget {
   Head1({Key? key}) : super(key: key);
@@ -79,8 +76,9 @@ class Head1 extends StatelessWidget {
                       icon: SvgPicture.asset(
                         'images/sort2a.svg',
                         /*width: 20, height: 20,*/
-                        color:
-                            _cvc.state ? Color(0xFF90A4AE) : Color(0xFF455A64),
+                        color: _cvc.state
+                            ? const Color(0xFF90A4AE)
+                            : const Color(0xFF455A64),
                       ),
                       onPressed: () {
                         _cvc.set(false);
