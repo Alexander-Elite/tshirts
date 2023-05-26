@@ -25,7 +25,7 @@ class CartScreen extends StatelessWidget {
       // color: Color(0xFFF7F9F9),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16.0),
-        height: 270,
+        height: 280,
         child: Column(
           children: [
             Container(

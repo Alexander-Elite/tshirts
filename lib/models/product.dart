@@ -11,6 +11,7 @@ class Product {
   final double price;
   final String image;
   final String category;
+  // final List<String> kit = ['HOME', 'AWAY'];
 
   const Product({
     required this.id,
