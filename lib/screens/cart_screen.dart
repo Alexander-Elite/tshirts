@@ -42,7 +42,7 @@ class CartScreen extends StatelessWidget {
                       child: Text(""),
                     ),
                     Text(
-                      "\$" + prod.price.toString(),
+                      "\$${prod.price}",
                       style: ThemeFonts.cart1,
                     ),
                   ],
@@ -181,7 +181,7 @@ class CCard extends StatelessWidget {
           Row(
             children: [
               Qty(qt: 2),
-              Expanded(child: Text("")),
+              const Expanded(child: Text("")),
               Text(
                 "\$${prod.price}",
                 style: ThemeFonts.productDetailPrice,

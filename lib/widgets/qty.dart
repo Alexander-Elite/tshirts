@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:tshirts/theme.dart';
 
 class Qty extends StatefulWidget {
-  final int qt;
-  const Qty({required this.qt, super.key});
+  int qt;
+
+  Qty({required this.qt, super.key});
+
+  void incr() {
+    qt++;
+  }
+
+  void decr() {
+    qt--;
+  }
 
   @override
   State<Qty> createState() => _QtyState();
@@ -50,6 +59,7 @@ class _QtyState extends State<Qty> {
           ),
           InkWell(
             onTap: () {
+              widget.incr();
               print("+");
             },
             child: Container(

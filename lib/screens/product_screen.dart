@@ -1,6 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +8,6 @@ import 'package:tshirts/states/detail_cubit.dart';
 import 'package:tshirts/states/productCubit.dart';
 import 'package:tshirts/theme.dart';
 import 'package:tshirts/widgets/also_like.dart';
-import 'package:tshirts/widgets/head1.dart';
 import 'package:tshirts/widgets/qty.dart';
 
 @RoutePage()
@@ -29,7 +26,7 @@ class ProductScreen extends StatelessWidget {
           if (prod != null) {
             final List<Product> all =
                 BlocProvider.of<ProductCubit>(context).state;
-            if (prod != null) {
+            if (true /* prod != null */) {
               for (int i = 0; i < all.length; i++) {
                 if (all[i].id != prod.id) {
                   alsoo.add(all[i]);
@@ -246,7 +243,7 @@ class ProductScreen extends StatelessWidget {
               ],
             );
           } else {
-            return SizedBox();
+            return const SizedBox();
           }
         },
       ),
@@ -313,8 +310,8 @@ class SizeBoxWidget extends StatelessWidget {
     return Container(
       height: 40,
       width: wWidth,
-      margin: EdgeInsetsDirectional.symmetric(horizontal: 8),
-      padding: EdgeInsetsDirectional.symmetric(horizontal: 8),
+      margin: const EdgeInsetsDirectional.symmetric(horizontal: 8),
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: 8),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: _bgcolor,
