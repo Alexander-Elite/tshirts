@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tshirts/models/product.dart';
 import 'package:tshirts/theme.dart';
+import 'package:tshirts/widgets/qty.dart';
 
 @RoutePage()
 class CartScreen extends StatelessWidget {
@@ -10,40 +12,20 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Product prod = Product.test();
+    final List prods = [prod, prod, prod, prod];
+
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
-      body: ListView(
-        children: [
-          Text(prod.title),
-          SizedBox(
-            height: 100,
-          ),
-          Text(prod.title),
-          SizedBox(
-            height: 100,
-          ),
-          Text(prod.title),
-          SizedBox(
-            height: 100,
-          ),
-          Text(prod.title),
-          SizedBox(
-            height: 100,
-          ),
-          Text(prod.title),
-          SizedBox(
-            height: 100,
-          ),
-          Text(prod.title),
-          SizedBox(
-            height: 100,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: prods.map((e) => CCard(prod: e)).toList(),
+        ),
       ),
       // color: Color(0xFFF7F9F9),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16.0),
-        height: 280,
+        height: 270,
         child: Column(
           children: [
             Container(
@@ -138,6 +120,81 @@ class CartScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CCard extends StatelessWidget {
+  final Product prod;
+  const CCard({required this.prod, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 155,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 56,
+                width: 56,
+                child: Image.network(prod.image),
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              SizedBox(
+                width: 200,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      prod.title.toUpperCase(),
+                      style: ThemeFonts.r16,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Text(
+                      prod.description,
+                      style: ThemeFonts.productDescr,
+                      maxLines: 1,
+                    )
+                  ],
+                ),
+              ),
+              const Expanded(child: Text("")),
+              SvgPicture.asset(
+                'images/recycle.svg',
+                alignment: Alignment.topRight,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Row(
+            children: [
+              Qty(qt: 2),
+              Expanded(child: Text("")),
+              Text(
+                "\$${prod.price}",
+                style: ThemeFonts.productDetailPrice,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          const Divider(
+            height: 1,
+          ),
+        ],
       ),
     );
   }

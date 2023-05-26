@@ -11,6 +11,7 @@ import 'package:tshirts/states/productCubit.dart';
 import 'package:tshirts/theme.dart';
 import 'package:tshirts/widgets/also_like.dart';
 import 'package:tshirts/widgets/head1.dart';
+import 'package:tshirts/widgets/qty.dart';
 
 @RoutePage()
 class ProductScreen extends StatelessWidget {
@@ -69,9 +70,13 @@ class ProductScreen extends StatelessWidget {
                     const SizedBox(
                       height: 6,
                     ),
-                    Text(
-                      prod.description.toUpperCase(),
-                      style: ThemeFonts.productDescr,
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        prod.description,
+                        style: ThemeFonts.productDescr,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                     const SizedBox(
                       height: 17,
@@ -89,53 +94,26 @@ class ProductScreen extends StatelessWidget {
                       indent: 16,
                       endIndent: 16,
                     ),
-
                     const SizedBox(
                       height: 24,
                     ),
-
                     const ButtonLine(
                         zag: "Size", btns: ['S', 'M', 'L', 'XL', "XXL"]),
-
                     const SizedBox(
                       height: 32,
                     ),
                     const ButtonLine(
-                        zag: "Kit", btns: ['HOME', 'AWAY', 'THIRD'], wWidth: 72,),
+                      zag: "Kit",
+                      btns: ['HOME', 'AWAY', 'THIRD'],
+                      wWidth: 72,
+                    ),
                     const SizedBox(
                       height: 24,
                     ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Text(
-                          "Qty",
-                          style: ThemeFonts.r16,
-                        ),
-                        SizedBox(
-                          width: 19,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "-",
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Text("1",
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: ThemeColors.title,
-                              fontWeight: FontWeight.w700,
-                            )),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        SizeBoxWidget(
-                          sizeIndex: "+",
-                        ),
+                        Qty(qt: 1),
                       ],
                     ),
                     const SizedBox(
@@ -355,7 +333,8 @@ class ButtonLine extends StatefulWidget {
   final String zag;
   final List btns;
   final double wWidth;
-  const ButtonLine({required this.zag, required this.btns, this.wWidth = 44, super.key});
+  const ButtonLine(
+      {required this.zag, required this.btns, this.wWidth = 44, super.key});
 
   @override
   State<ButtonLine> createState() => _ButtonLineState();
@@ -370,24 +349,27 @@ class _ButtonLineState extends State<ButtonLine> {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(widget.zag, style: ThemeFonts.r16,),
-        const SizedBox(width: 12,),
+        Text(
+          widget.zag,
+          style: ThemeFonts.r16,
+        ),
+        const SizedBox(
+          width: 12,
+        ),
         SizedBox(
           height: 40,
           width: 350,
-          child:
-            ListView(
-
-              scrollDirection: Axis.horizontal,
-              children: widget.btns
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: widget.btns
                 .map((e) => SizeBoxWidget(
-                    sizeIndex: e,
-                    wWidth: widget.wWidth,
-                active: Random().nextBool(),
-                selected: Random().nextBool(),
-                  ))
-              .toList(),
-        ),
+                      sizeIndex: e,
+                      wWidth: widget.wWidth,
+                      active: Random().nextBool(),
+                      selected: Random().nextBool(),
+                    ))
+                .toList(),
+          ),
         ),
       ],
     );
