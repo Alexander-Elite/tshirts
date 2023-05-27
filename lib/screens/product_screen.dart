@@ -94,14 +94,14 @@ class ProductScreen extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    const ButtonLine(
-                        zag: "Size", btns: ['S', 'M', 'L', 'XL', "XXL"]),
+                    ButtonLine(
+                        zag: "Size", btns: const ['S', 'M', 'L', 'XL', "XXL"]),
                     const SizedBox(
                       height: 32,
                     ),
-                    const ButtonLine(
+                    ButtonLine(
                       zag: "Kit",
-                      btns: ['HOME', 'AWAY', 'THIRD'],
+                      btns: const ['HOME', 'AWAY', 'THIRD'],
                       wWidth: 72,
                     ),
                     const SizedBox(
@@ -139,7 +139,7 @@ class ProductScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        print("asdasd");
+                        //print("asdasd");
                       },
                       child: Container(
                         height: 40,
@@ -330,8 +330,12 @@ class ButtonLine extends StatefulWidget {
   final String zag;
   final List btns;
   final double wWidth;
-  const ButtonLine(
-      {required this.zag, required this.btns, this.wWidth = 44, super.key});
+  ButtonLine(
+      {required this.zag, required this.btns, this.wWidth = 44, super.key });
+
+  Map<String, bool> act0 = {};
+  Map<String, bool> sel0 = {};
+  // final Map act0 = {};
 
   @override
   State<ButtonLine> createState() => _ButtonLineState();
@@ -339,6 +343,31 @@ class ButtonLine extends StatefulWidget {
 
 class _ButtonLineState extends State<ButtonLine> {
   _ButtonLineState();
+
+@override
+  void initState() {
+    super.initState();
+    for( final e in widget.btns) {
+      widget.act0[e] =  Random().nextBool();
+      widget.sel0[e] = false;
+    }
+
+  var set = false;
+
+    widget.act0.forEach((key, value) {
+      if (value)
+        {
+          if (!set)
+            {
+              widget.sel0[key] = true;
+              set = true;
+            }
+        }
+
+    });
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -359,16 +388,41 @@ class _ButtonLineState extends State<ButtonLine> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: widget.btns
-                .map((e) => SizeBoxWidget(
-                      sizeIndex: e,
-                      wWidth: widget.wWidth,
-                      active: Random().nextBool(),
-                      selected: Random().nextBool(),
-                    ))
+                .map((e) {
+              return InkWell(
+                onTap: (){
+                  setState(() {
+                    for( final a in widget.btns) {
+                      widget.sel0[a] = false;
+                    }
+                    widget.sel0[e] = true;
+                  });
+                },
+                child: SizeBoxWidget(
+                  sizeIndex: e,
+                  wWidth: widget.wWidth,
+                  active: widget.act0[e]!,
+                  selected: widget.sel0[e]!,
+
+                ),
+              );       }
+            )
                 .toList(),
           ),
         ),
       ],
     );
   }
+}
+
+class Activities
+{
+  late String _name;
+  late bool _status;
+
+  bool get status => _status;
+  String get name => _name;
+  set status( bool value ) { _status = value; }
+  Activities(this._name, this._status);
+
 }
