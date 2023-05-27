@@ -363,9 +363,7 @@ class _ButtonLineState extends State<ButtonLine> {
               set = true;
             }
         }
-
     });
-
   }
 
 
@@ -391,38 +389,27 @@ class _ButtonLineState extends State<ButtonLine> {
                 .map((e) {
               return InkWell(
                 onTap: (){
-                  setState(() {
-                    for( final a in widget.btns) {
+                  if ( widget.act0[e]! )
+                  {
+                    for( final a in widget.btns)
+                    {
                       widget.sel0[a] = false;
                     }
                     widget.sel0[e] = true;
-                  });
+                  setState((){});
+                  }
                 },
                 child: SizeBoxWidget(
                   sizeIndex: e,
                   wWidth: widget.wWidth,
                   active: widget.act0[e]!,
                   selected: widget.sel0[e]!,
-
                 ),
               );       }
-            )
-                .toList(),
+            ).toList(),
           ),
         ),
       ],
     );
   }
-}
-
-class Activities
-{
-  late String _name;
-  late bool _status;
-
-  bool get status => _status;
-  String get name => _name;
-  set status( bool value ) { _status = value; }
-  Activities(this._name, this._status);
-
 }
