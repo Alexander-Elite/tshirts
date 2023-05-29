@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tshirts/models/product.dart';
+import 'package:tshirts/states/cart_cubit.dart';
 import 'package:tshirts/states/detail_cubit.dart';
 import 'package:tshirts/states/productCubit.dart';
 import 'package:tshirts/theme.dart';
@@ -13,10 +14,11 @@ import 'package:tshirts/widgets/qty.dart';
 @RoutePage()
 class ProductScreen extends StatelessWidget {
   final Product? prod;
-  const ProductScreen({Key? key, this.prod}) : super(key: key);
+  ProductScreen({Key? key, this.prod}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var qtyKey = GlobalKey<QtyState>();
     //final Product prod = Product.test();
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
@@ -24,8 +26,8 @@ class ProductScreen extends StatelessWidget {
         builder: (BuildContext context, prod) {
           List<Product> alsoo = [];
           if (prod != null) {
-            final List<Product> all =
-                BlocProvider.of<ProductCubit>(context).state;
+            final List<Product> all = BlocProvider.of<ProductCubit>(context)
+                .state['all'] as List<Product>;
             if (true /* prod != null */) {
               for (int i = 0; i < all.length; i++) {
                 if (all[i].id != prod.id) {
@@ -110,7 +112,10 @@ class ProductScreen extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Qty(qt: 1),
+                        Qty(
+                          qt: 1,
+                          key: qtyKey,
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -139,6 +144,8 @@ class ProductScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
+                        BlocProvider.of<CartCubit>(context)
+                            .add(prod.id, qtyKey.currentState!.widget.qt);
                         //print("asdasd");
                       },
                       child: Container(
@@ -331,7 +338,7 @@ class ButtonLine extends StatefulWidget {
   final List btns;
   final double wWidth;
   ButtonLine(
-      {required this.zag, required this.btns, this.wWidth = 44, super.key });
+      {required this.zag, required this.btns, this.wWidth = 44, super.key});
 
   Map<String, bool> act0 = {};
   Map<String, bool> sel0 = {};
@@ -344,31 +351,25 @@ class ButtonLine extends StatefulWidget {
 class _ButtonLineState extends State<ButtonLine> {
   _ButtonLineState();
 
-@override
-  void initState() {
-    super.initState();
-    for( final e in widget.btns) {
-      widget.act0[e] =  Random().nextBool();
-      widget.sel0[e] = false;
-    }
-
-  var set = false;
-
-    widget.act0.forEach((key, value) {
-      if (value)
-        {
-          if (!set)
-            {
-              widget.sel0[key] = true;
-              set = true;
-            }
-        }
-    });
-  }
-
-
   @override
   Widget build(BuildContext context) {
+    if (widget.act0.isEmpty) {
+      for (final e in widget.btns) {
+        widget.act0[e] = Random().nextBool();
+        widget.sel0[e] = false;
+      }
+
+      var set = false;
+
+      widget.act0.forEach((key, value) {
+        if (value) {
+          if (!set) {
+            widget.sel0[key] = true;
+            set = true;
+          }
+        }
+      });
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -385,18 +386,15 @@ class _ButtonLineState extends State<ButtonLine> {
           width: 350,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            children: widget.btns
-                .map((e) {
+            children: widget.btns.map((e) {
               return InkWell(
-                onTap: (){
-                  if ( widget.act0[e]! )
-                  {
-                    for( final a in widget.btns)
-                    {
+                onTap: () {
+                  if (widget.act0[e]!) {
+                    for (final a in widget.btns) {
                       widget.sel0[a] = false;
                     }
                     widget.sel0[e] = true;
-                  setState((){});
+                    setState(() {});
                   }
                 },
                 child: SizeBoxWidget(
@@ -405,8 +403,8 @@ class _ButtonLineState extends State<ButtonLine> {
                   active: widget.act0[e]!,
                   selected: widget.sel0[e]!,
                 ),
-              );       }
-            ).toList(),
+              );
+            }).toList(),
           ),
         ),
       ],

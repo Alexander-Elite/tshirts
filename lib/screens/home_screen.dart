@@ -20,19 +20,21 @@ class HomeScreen extends StatelessWidget {
         children: [
           Head1(),
           Expanded(
-            child: BlocBuilder<ProductCubit, List<Product>>(
+            child: BlocBuilder<ProductCubit, Map<String, List<Product>>>(
               builder: (context, state) {
                 return BlocBuilder<CatalogViewCubit, bool>(
                   builder: (context, state2) {
-                    List<Widget> child = state
-                        .map(
-                          (e) => MyProduct(
-                            product: e,
-                            onAdd: () {},
-                            cols: state2,
-                          ),
-                        )
-                        .toList();
+                    List<Widget> child = [];
+                    if (state.containsKey("search")) {
+                      child = state['search']!
+                          .map(
+                            (e) => MyProduct(
+                              product: e,
+                              cols: state2,
+                            ),
+                          )
+                          .toList();
+                    }
                     return state2
                         ? ListView(
                             padding: const EdgeInsets.all(16),

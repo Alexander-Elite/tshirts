@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tshirts/models/product.dart';
+import 'package:tshirts/states/cart_cubit.dart';
+import 'package:tshirts/states/productCubit.dart';
 import 'package:tshirts/theme.dart';
 import 'package:tshirts/widgets/qty.dart';
 
@@ -11,16 +14,28 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Product prod = Product.test();
-    final List prods = [prod, prod, prod, prod];
-
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: prods.map((e) => CCard(prod: e)).toList(),
-        ),
+      body: BlocBuilder<CartCubit, Map<String, int>>(
+        builder: (context, state) {
+          var all = BlocProvider.of<ProductCubit>(context).state['all']
+              as List<Product>;
+          List<Product> prods = [];
+          state.forEach((key, qty) {
+            prods.addAll(all.where((element) => element.id == int.parse(key)));
+          });
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(
+              children: prods
+                  .map((e) => CCard(
+                        prod: e,
+                        qt: state[e.id.toString()]!,
+                      ))
+                  .toList(),
+            ),
+          );
+        },
       ),
       // color: Color(0xFFF7F9F9),
       bottomNavigationBar: Container(
@@ -42,7 +57,7 @@ class CartScreen extends StatelessWidget {
                       child: Text(""),
                     ),
                     Text(
-                      "\$${prod.price}",
+                      "\$654",
                       style: ThemeFonts.cart1,
                     ),
                   ],
@@ -81,7 +96,7 @@ class CartScreen extends StatelessWidget {
                       child: Text(""),
                     ),
                     Text(
-                      "\$${prod.price}",
+                      "\$123",
                       style: ThemeFonts.cart2,
                     )
                   ],
@@ -127,7 +142,8 @@ class CartScreen extends StatelessWidget {
 
 class CCard extends StatelessWidget {
   final Product prod;
-  const CCard({required this.prod, super.key});
+  final int qt;
+  const CCard({required this.prod, super.key, required this.qt});
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +196,18 @@ class CCard extends StatelessWidget {
           ),
           Row(
             children: [
-              Qty(qt: 2),
+              Qty(
+                  qt: qt,
+                  onTapMinus: () {
+                    if (qt > 1) {
+                      BlocProvider.of<CartCubit>(context)
+                          .setQty(prod.id, (qt - 1));
+                    }
+                  },
+                  onTapPlus: () {
+                    BlocProvider.of<CartCubit>(context)
+                        .setQty(prod.id, (qt + 1));
+                  }),
               const Expanded(child: Text("")),
               Text(
                 "\$${prod.price}",

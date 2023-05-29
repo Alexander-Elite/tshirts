@@ -3,14 +3,16 @@ import 'package:tshirts/theme.dart';
 
 class Qty extends StatefulWidget {
   int qt;
+  VoidCallback? onTapMinus;
+  VoidCallback? onTapPlus;
 
-  Qty({required this.qt, super.key});
+  Qty({required this.qt, super.key, this.onTapMinus, this.onTapPlus});
 
   @override
-  State<Qty> createState() => _QtyState();
+  State<Qty> createState() => QtyState();
 }
 
-class _QtyState extends State<Qty> {
+class QtyState extends State<Qty> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -29,13 +31,14 @@ class _QtyState extends State<Qty> {
             width: 19,
           ),
           InkWell(
-            onTap: () {
-              if (widget.qt > 1) {
-                setState(() {
-                  widget.qt--;
-                });
-              }
-            },
+            onTap: widget.onTapMinus ??
+                () {
+                  if (widget.qt > 1) {
+                    setState(() {
+                      widget.qt--;
+                    });
+                  }
+                },
             child: Container(
               height: 40,
               width: 44,
@@ -59,11 +62,12 @@ class _QtyState extends State<Qty> {
             ),
           ),
           InkWell(
-            onTap: () {
-              setState(() {
-                widget.qt++;
-              });
-            },
+            onTap: widget.onTapPlus ??
+                () {
+                  setState(() {
+                    widget.qt++;
+                  });
+                },
             child: Container(
               height: 40,
               width: 44,

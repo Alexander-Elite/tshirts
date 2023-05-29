@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tshirts/states/cart_cubit.dart';
 import 'package:tshirts/states/detail_cubit.dart';
 import '../auto_route.dart';
 import '../theme.dart';
@@ -65,9 +66,17 @@ class MainScreen extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       alignment: Alignment.center,
-                      child: const Text(
-                        '2',
-                        style: TextStyle(fontSize: 10),
+                      child: BlocBuilder<CartCubit, Map<String, int>>(
+                        builder: (context, state) {
+                          int count = 0;
+                          state.forEach((key, value) {
+                            count += value;
+                          });
+                          return Text(
+                            count.toString(),
+                            style: TextStyle(fontSize: 10),
+                          );
+                        },
                       ),
                     ),
                   ),

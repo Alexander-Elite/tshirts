@@ -21,6 +21,8 @@ class DioProductsProvider // implements ProductsProvider
     final response = await _dio.get("/products"); // /category/men's clothing
     return (response.data as List)
         .map((postJson) => Product.fromJson(postJson))
+        .toList()
+        .where((element) => element.category.contains("clothing"))
         .toList();
   }
 }

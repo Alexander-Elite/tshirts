@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tshirts/states/catalog_view_cubit.dart';
+import 'package:tshirts/states/productCubit.dart';
 import 'package:tshirts/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,6 +32,10 @@ class Head1 extends StatelessWidget {
               Form(
                 key: _formKey,
                 child: TextFormField(
+                  onChanged: (string) {
+                    BlocProvider.of<ProductCubit>(context, listen: false)
+                        .search(string);
+                  },
                   controller: _titleController,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.zero,
