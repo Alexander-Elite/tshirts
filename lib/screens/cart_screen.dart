@@ -10,10 +10,12 @@ import 'package:tshirts/widgets/qty.dart';
 
 @RoutePage()
 class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+  final double summ = 0;
 
+  const CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
       body: BlocBuilder<CartCubit, Map<String, int>>(
@@ -24,14 +26,15 @@ class CartScreen extends StatelessWidget {
           state.forEach((key, qty) {
             prods.addAll(all.where((element) => element.id == int.parse(key)));
           });
+          // prods.map( (e) { print(e); } );
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView(
               children: prods
-                  .map((e) => CCard(
+                  .map( (e) => CCard(
                         prod: e,
                         qt: state[e.id.toString()]!,
-                      ))
+                      ) )
                   .toList(),
             ),
           );
@@ -46,14 +49,14 @@ class CartScreen extends StatelessWidget {
             Container(
               color: const Color(0xFFF7F9F9),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(children: [
+              child: const Column(children: [
                 Row(
                   children: [
-                    const Text(
+                    Text(
                       "Subtotal",
                       style: ThemeFonts.cart1,
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Text(""),
                     ),
                     Text(
@@ -62,7 +65,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Row(
+                Row(
                   children: [
                     Text(
                       "Shipping",
@@ -74,7 +77,7 @@ class CartScreen extends StatelessWidget {
                     Text("-")
                   ],
                 ),
-                const Row(
+                Row(
                   children: [
                     Text(
                       "Taxes",
@@ -88,15 +91,15 @@ class CartScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Text(
+                    Text(
                       "Total",
                       style: ThemeFonts.cart2,
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Text(""),
                     ),
-                    Text(
-                      "\$123",
+                    Text(  ////////////////////////////////////////////
+                       "\$0", // summ.toString(),
                       style: ThemeFonts.cart2,
                     )
                   ],
@@ -185,9 +188,13 @@ class CCard extends StatelessWidget {
                 ),
               ),
               const Expanded(child: Text("")),
-              SvgPicture.asset(
-                'images/recycle.svg',
-                alignment: Alignment.topRight,
+              InkWell(
+                onTap: (){ BlocProvider.of<CartCubit>(context)
+                    .remove(prod.id); },
+                child: SvgPicture.asset(
+                  'images/recycle.svg',
+                  alignment: Alignment.topRight,
+                ),
               ),
             ],
           ),
@@ -210,7 +217,7 @@ class CCard extends StatelessWidget {
                   }),
               const Expanded(child: Text("")),
               Text(
-                "\$${prod.price}",
+                "\$ " + (prod.price * qt).toString(),
                 style: ThemeFonts.productDetailPrice,
               ),
             ],

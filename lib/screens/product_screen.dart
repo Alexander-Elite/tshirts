@@ -14,7 +14,7 @@ import 'package:tshirts/widgets/qty.dart';
 @RoutePage()
 class ProductScreen extends StatelessWidget {
   final Product? prod;
-  ProductScreen({Key? key, this.prod}) : super(key: key);
+  const ProductScreen({Key? key, this.prod}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

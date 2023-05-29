@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,7 +72,7 @@ class MainScreen extends StatelessWidget {
                           });
                           return Text(
                             count.toString(),
-                            style: TextStyle(fontSize: 10),
+                            style: const TextStyle(fontSize: 10),
                           );
                         },
                       ),

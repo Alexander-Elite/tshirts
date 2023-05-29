@@ -98,8 +98,8 @@ class Product1Widget extends StatelessWidget {
                       onTap: () {
                         BlocProvider.of<CartCubit>(context).add(product.id, 1);
                       },
-                      child: InkWell(
-                        child: const Text(
+                      child: const InkWell(
+                        child: Text(
                           "ADD TO CART",
                           style: ThemeFonts.productAddToCart,
                         ),

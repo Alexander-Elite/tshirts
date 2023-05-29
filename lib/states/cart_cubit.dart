@@ -12,6 +12,11 @@ class CartCubit extends Cubit<Map<String, int>> {
     emit(tmp);
   }
 
+  Future<String> getSumm() async
+  {
+    return "0";
+  }
+
   void add(int id, int qty) async {
     await _provider.add(id, qty);
     _getCart();
