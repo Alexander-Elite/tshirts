@@ -18,7 +18,7 @@ abstract class _$AppRouter extends RootStackRouter {
     CartRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CartScreen(),
+        child: CartScreen(),
       );
     },
     HomeRoute.name: (routeData) {

@@ -10,12 +10,11 @@ import 'package:tshirts/widgets/qty.dart';
 
 @RoutePage()
 class CartScreen extends StatelessWidget {
-  final double summ = 0;
+  double summ = 0;
 
-  const CartScreen({super.key});
+  CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
       body: BlocBuilder<CartCubit, Map<String, int>>(
@@ -23,18 +22,25 @@ class CartScreen extends StatelessWidget {
           var all = BlocProvider.of<ProductCubit>(context).state['all']
               as List<Product>;
           List<Product> prods = [];
+          summ = 0;
+
           state.forEach((key, qty) {
-            prods.addAll(all.where((element) => element.id == int.parse(key)));
+            var newElement =
+                all.where((element) => element.id == int.parse(key));
+            prods.addAll(newElement);
+            summ += newElement.first.price * qty;
           });
-          // prods.map( (e) { print(e); } );
+
+          // print(summ);
+
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView(
               children: prods
-                  .map( (e) => CCard(
+                  .map((e) => CCard(
                         prod: e,
                         qt: state[e.id.toString()]!,
-                      ) )
+                      ))
                   .toList(),
             ),
           );
@@ -49,23 +55,23 @@ class CartScreen extends StatelessWidget {
             Container(
               color: const Color(0xFFF7F9F9),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: const Column(children: [
+              child: Column(children: [
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Subtotal",
                       style: ThemeFonts.cart1,
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Text(""),
                     ),
                     Text(
-                      "\$654",
+                      "\$" + summ.toString(),
                       style: ThemeFonts.cart1,
                     ),
                   ],
                 ),
-                Row(
+                const Row(
                   children: [
                     Text(
                       "Shipping",
@@ -77,7 +83,7 @@ class CartScreen extends StatelessWidget {
                     Text("-")
                   ],
                 ),
-                Row(
+                const Row(
                   children: [
                     Text(
                       "Taxes",
@@ -91,15 +97,16 @@ class CartScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Total",
                       style: ThemeFonts.cart2,
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Text(""),
                     ),
-                    Text(  ////////////////////////////////////////////
-                       "\$0", // summ.toString(),
+                    Text(
+                      ////////////////////////////////////////////
+                      "\$" + summ.toString(),
                       style: ThemeFonts.cart2,
                     )
                   ],
@@ -189,8 +196,9 @@ class CCard extends StatelessWidget {
               ),
               const Expanded(child: Text("")),
               InkWell(
-                onTap: (){ BlocProvider.of<CartCubit>(context)
-                    .remove(prod.id); },
+                onTap: () {
+                  BlocProvider.of<CartCubit>(context).remove(prod.id);
+                },
                 child: SvgPicture.asset(
                   'images/recycle.svg',
                   alignment: Alignment.topRight,

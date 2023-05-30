@@ -67,6 +67,7 @@ class Head1 extends StatelessWidget {
                     IconButton(
                       icon: SvgPicture.asset(
                         'images/sort1a.svg',
+                        // ignore: deprecated_member_use
                         color: _cvc.state
                             ? const Color(0xFF455A64)
                             : const Color(0xFF90A4AE),
