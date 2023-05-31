@@ -4,14 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tshirts/models/product.dart';
 import 'package:tshirts/states/cart_cubit.dart';
+import 'package:tshirts/states/cart_price_cubit.dart';
 import 'package:tshirts/states/productCubit.dart';
 import 'package:tshirts/theme.dart';
 import 'package:tshirts/widgets/qty.dart';
 
 @RoutePage()
 class CartScreen extends StatelessWidget {
-  double summ = 0;
-
   CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
@@ -19,10 +18,10 @@ class CartScreen extends StatelessWidget {
       backgroundColor: ThemeColors.scaffold,
       body: BlocBuilder<CartCubit, Map<String, int>>(
         builder: (context, state) {
+          double summ = 0;
           var all = BlocProvider.of<ProductCubit>(context).state['all']
               as List<Product>;
           List<Product> prods = [];
-          summ = 0;
 
           state.forEach((key, qty) {
             var newElement =
@@ -30,6 +29,8 @@ class CartScreen extends StatelessWidget {
             prods.addAll(newElement);
             summ += newElement.first.price * qty;
           });
+
+          BlocProvider.of<CartPriceCubit>(context).setSum(summ);
 
           // print(summ);
 
@@ -50,101 +51,104 @@ class CartScreen extends StatelessWidget {
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16.0),
         height: 280,
-        child: Column(
-          children: [
-            Container(
-              color: const Color(0xFFF7F9F9),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(children: [
-                Row(
-                  children: [
-                    const Text(
-                      "Subtotal",
-                      style: ThemeFonts.cart1,
-                    ),
-                    const Expanded(
-                      child: Text(""),
-                    ),
-                    Text(
-                      "\$" + summ.toString(),
-                      style: ThemeFonts.cart1,
-                    ),
-                  ],
-                ),
-                const Row(
-                  children: [
-                    Text(
-                      "Shipping",
-                      style: ThemeFonts.cart1,
-                    ),
-                    Expanded(
-                      child: Text(""),
-                    ),
-                    Text("-")
-                  ],
-                ),
-                const Row(
-                  children: [
-                    Text(
-                      "Taxes",
-                      style: ThemeFonts.cart1,
-                    ),
-                    Expanded(
-                      child: Text(""),
-                    ),
-                    Text("-")
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      "Total",
-                      style: ThemeFonts.cart2,
-                    ),
-                    const Expanded(
-                      child: Text(""),
-                    ),
-                    Text(
-                      ////////////////////////////////////////////
-                      "\$" + summ.toString(),
-                      style: ThemeFonts.cart2,
-                    )
-                  ],
-                ),
-              ]),
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 16,
-                ),
-                TextButton(
-                  onPressed: () {
-                    AutoRouter.of(context).pop();
-                  },
-                  child: const Text(
-                    "BACK",
-                    style: ThemeFonts.cartBack,
+        child: BlocBuilder<CartPriceCubit, String>(builder: (context, state) {
+          return Column(
+            children: [
+              Container(
+                color: const Color(0xFFF7F9F9),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(children: [
+                  Row(
+                    children: [
+                      const Text(
+                        "Subtotal",
+                        style: ThemeFonts.cart1,
+                      ),
+                      const Expanded(
+                        child: Text(""),
+                      ),
+                      Text(
+                        state,
+                        style: ThemeFonts.cart1,
+                      ),
+                    ],
                   ),
-                ),
-                const Expanded(child: Text("")),
-                Container(
-                  height: 40,
-                  width: 244,
-                  alignment: Alignment.center,
-                  decoration: ThemeFonts.cyanButton,
-                  child: const Text(
-                    "CONTINUE TO CHECKOUT",
-                    style: ThemeFonts.cyanButtonText,
+                  const Row(
+                    children: [
+                      Text(
+                        "Shipping",
+                        style: ThemeFonts.cart1,
+                      ),
+                      Expanded(
+                        child: Text(""),
+                      ),
+                      Text("-")
+                    ],
                   ),
-                ),
-              ],
-            )
-          ],
-        ),
+                  const Row(
+                    children: [
+                      Text(
+                        "Taxes",
+                        style: ThemeFonts.cart1,
+                      ),
+                      Expanded(
+                        child: Text(""),
+                      ),
+                      Text("-")
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        "Total",
+                        style: ThemeFonts.cart2,
+                      ),
+                      const Expanded(
+                        child: Text(""),
+                      ),
+                      Text(
+                        ////////////////////////////////////////////
+                        state,
+                        style: ThemeFonts.cart2,
+                      )
+                    ],
+                  ),
+                ]),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      AutoRouter.of(context).pop();
+                    },
+                    child: const Text(
+                      "BACK",
+                      style: ThemeFonts.cartBack,
+                    ),
+                  ),
+                  const Expanded(child: Text("")),
+                  Container(
+                    height: 40,
+                    width: 244,
+                    alignment: Alignment.center,
+                    decoration: ThemeFonts.cyanButton,
+                    child: const Text(
+                      "CONTINUE TO CHECKOUT",
+                      style: ThemeFonts.cyanButtonText,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          );
+        }),
       ),
     );
   }
@@ -225,7 +229,7 @@ class CCard extends StatelessWidget {
                   }),
               const Expanded(child: Text("")),
               Text(
-                "\$ " + (prod.price * qt).toString(),
+                "\$ " + (prod.price * qt).toStringAsFixed(2),
                 style: ThemeFonts.productDetailPrice,
               ),
             ],

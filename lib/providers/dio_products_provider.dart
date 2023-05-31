@@ -12,9 +12,6 @@ class DioProductsProvider // implements ProductsProvider
 
   DioProductsProvider() {
     _dio = Dio(BaseOptions(baseUrl: 'https://fakestoreapi.com'));
-    _dio.interceptors.add(LogInterceptor(
-      responseBody: false,
-    ));
   }
 
   Future<List<Product>> getProducts() async {

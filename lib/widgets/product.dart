@@ -54,14 +54,11 @@ class Product1Widget extends StatelessWidget {
         children: [
           SizedBox(
             height: 112,
-            child: Positioned.fill(
-              child: Image.network(
-                product.image,
-                height: 112,
-                width: 112,
-                alignment: Alignment.center,
-                // fit: BoxFit.cover,
-              ),
+            child: Image.network(
+              product.image,
+              height: 112,
+              width: 112,
+              fit: BoxFit.contain,
             ),
           ),
           const SizedBox(
@@ -138,12 +135,9 @@ class Product2Widget extends StatelessWidget {
             SizedBox(
               height: 162,
               width: 162,
-              child: Positioned.fill(
-                child: Image.network(
-                  product.image,
-                  alignment: Alignment.center,
-                  fit: BoxFit.scaleDown,
-                ),
+              child: Image.network(
+                product.image,
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(
