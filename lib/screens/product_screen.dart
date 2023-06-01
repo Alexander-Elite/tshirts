@@ -19,7 +19,6 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var qtyKey = GlobalKey<QtyState>();
-    //final Product prod = Product.test();
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
       body: BlocBuilder<DetailCubit, Product?>(
@@ -28,7 +27,7 @@ class ProductScreen extends StatelessWidget {
           if (prod != null) {
             final List<Product> all = BlocProvider.of<ProductCubit>(context)
                 .state['all'] as List<Product>;
-            if (true /* prod != null */) {
+            if (true) {
               for (int i = 0; i < all.length; i++) {
                 if (all[i].id != prod.id) {
                   alsoo.add(all[i]);
@@ -37,7 +36,6 @@ class ProductScreen extends StatelessWidget {
             }
 
             return ListView(
-              // mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Stack(
                   alignment: Alignment.center,
@@ -146,7 +144,6 @@ class ProductScreen extends StatelessWidget {
                       onTap: () {
                         BlocProvider.of<CartCubit>(context)
                             .add(prod.id, qtyKey.currentState!.widget.qt);
-                        //print("asdasd");
                       },
                       child: Container(
                         height: 40,

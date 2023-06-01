@@ -3,9 +3,6 @@ import 'package:tshirts/models/product.dart';
 
 class DioProductsProvider // implements ProductsProvider
 {
-  // final _dio = Dio(
-  //   BaseOptions( baseUrl: 'https://dummyjson.com' )
-  // );
   late final Dio _dio;
 
   // https://fakestoreapi.com/products

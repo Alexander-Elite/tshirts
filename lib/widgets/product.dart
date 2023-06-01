@@ -130,7 +130,6 @@ class Product2Widget extends StatelessWidget {
           AutoTabsRouter.of(context).setActiveIndex(1);
         },
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 162,

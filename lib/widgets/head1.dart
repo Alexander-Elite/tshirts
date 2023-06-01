@@ -74,14 +74,12 @@ class Head1 extends StatelessWidget {
                       ),
                       padding: EdgeInsets.zero,
                       onPressed: () {
-                        // AutoTabsRouter.of(context).setActiveIndex(2);
                         _cvc.set(true);
                       },
                     ),
                     IconButton(
                       icon: SvgPicture.asset(
                         'images/sort2a.svg',
-                        /*width: 20, height: 20,*/
                         color: _cvc.state
                             ? const Color(0xFF90A4AE)
                             : const Color(0xFF455A64),

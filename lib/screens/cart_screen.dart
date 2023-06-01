@@ -14,6 +14,8 @@ class CartScreen extends StatelessWidget {
   CartScreen({super.key});
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       backgroundColor: ThemeColors.scaffold,
       body: BlocBuilder<CartCubit, Map<String, int>>(
@@ -32,8 +34,6 @@ class CartScreen extends StatelessWidget {
 
           BlocProvider.of<CartPriceCubit>(context).setSum(summ);
 
-          // print(summ);
-
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView(
@@ -47,7 +47,6 @@ class CartScreen extends StatelessWidget {
           );
         },
       ),
-      // color: Color(0xFFF7F9F9),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16.0),
         height: 280,

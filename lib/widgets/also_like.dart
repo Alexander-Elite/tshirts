@@ -10,7 +10,6 @@ class AlsoLike extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final Product prod = Product.test();
     return InkWell(
       onTap: () {
         BlocProvider.of<DetailCubit>(context).view(prod);
